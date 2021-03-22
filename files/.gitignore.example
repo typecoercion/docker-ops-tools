@@ -1,0 +1,14 @@
+*.backup
+*.lock.hcl
+*.terraform
+
+/.env
+/.envrc
+/.private
+/.venv
+/.vscode
+
+# blackbox files
+/.blackbox/secring.gpg
+/credentials/environments/etc/root-key.pem
+/credentials/vault.pass

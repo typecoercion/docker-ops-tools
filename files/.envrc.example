@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+source_up
+dotenv_if_exists
+
+commands=(
+  ansible
+  ansible-config
+  ansible-console
+  ansible-galaxy
+  ansible-inventory
+  ansible-lint
+  ansible-playbook
+  ansible-vault
+  tfall
+  tfconfig
+  tfvars
+  tfvault
+)
+
+_delegate() {
+  docker_run="docker-run"
+  compose_conf="docker-compose.yml"
+  private=".private/.direnv/bin"
+  service="ops"
+  shell_hash="#!/usr/bin/env bash"
+  working_dir="/app"
+
+  rm -rf "${private}" && mkdir -p "${private}"
+  PATH_add "${private}"
+
+  cat <<- EOF > "${private}/${docker_run}"
+		${shell_hash}
+		TOP="\$(git rev-parse --show-toplevel)"
+		docker-compose --file "\${TOP}/${compose_conf}" run --rm -w "\${PWD/\${TOP}/${working_dir}}" "\$@"
+		EOF
+  chmod +x "${private}/${docker_run}"
+
+  for c in "${commands[@]}"; do
+    echo -en \
+      "${shell_hash}\n${docker_run} ${service} bash -c \"${c} \$*\"" \
+      > "${private}/${c}" && chmod +x "${private}/${c}"
+  done
+
+  if [[ -e ./credentials/vault.pass ]]; then
+    export ANSIBLE_VAULT_PASS;
+    ANSIBLE_VAULT_PASS=$(cat ./credentials/vault.pass)
+  fi
+}
+
+_delegate
