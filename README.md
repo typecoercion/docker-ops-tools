@@ -11,7 +11,7 @@ Opinionated tooling for maintaining terraform repository, module structures, and
 This will interactively sync files to a repository to support the aforementioned setup.
 
 ```shell
-docker run -it -v $(pwd):/app ghcr.io/typecoercion/ops-tools:0.2.20 bootstrap
+docker run -it -v $(pwd):/app ghcr.io/typecoercion/ops-tools:0.2.21 bootstrap
 ```
 
 ---
@@ -87,7 +87,7 @@ provider in the example above. The the `vault` property to consistently generate
 Install tool versions via [asdf-vm](https://asdf-vm.com/) plugins. Terraform and Packer are included.
 
 ```dockerfile
-FROM ghcr.io/typecoercion/ops-tools:0.2.20
+FROM ghcr.io/typecoercion/ops-tools:0.2.21
 RUN asdf install packer 1.7.0
-RUN asdf install terraform 0.14.7
+RUN asdf install terraform 0.14.8
 ```
