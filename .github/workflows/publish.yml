@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
 
+env:
+  docker-path: typecoercion/ops-tools
+
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -24,17 +27,14 @@ jobs:
         with:
           install: true
 
-      # https://docs.github.com/en/packages/guides/migrating-to-github-container-registry-for-docker-images#authenticating-with-the-container-registry
-      # During the GitHub Container Registry beta, the only supported form of authentication is the PAT.
-
       - uses: docker/login-action@v1
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.CR_TOKEN }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: docker/build-push-action@v2
         with:
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/typecoercion/ops-tools:${{ steps.version-numeric.outputs.version }}
+          tags: ghcr.io/${{ env.docker-path }}:${{ steps.version-numeric.outputs.version }}
