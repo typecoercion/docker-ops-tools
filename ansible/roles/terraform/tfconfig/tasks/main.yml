@@ -29,6 +29,7 @@
         | sort
         | replace('/', '_')
         | replace('._terraform_', '')
+        | replace('applications_', 'a_')
         | replace('environments_', 'e_')
         | replace('aws-us-east-', 'aws_use')
         | replace('aws-us-west-', 'aws_usw') -}}

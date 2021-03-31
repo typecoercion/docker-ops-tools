@@ -9,7 +9,8 @@ services:
       # - ${AWS_CONFIG_FILE:-~/.aws/config}:/root/.aws/config:ro
       # - ${AWS_SHARED_CREDENTIALS_FILE:-~/.aws/credentials}:/root/.aws/credentials:ro
       # - ${AZURE_CONFIG_DIR:-~/.azure}:/root/.azure
-      - ${HOME}/.ssh/:/root/.ssh/:ro
+      # - ${CLOUDSDK_CONFIG:-~/.config/gcloud}:/root/.config/gcloud
+      # - ${HOME}/.ssh/:/root/.ssh/:ro
       - ./.private/.ansible/:/root/.ansible/:rw
       - ./.private/.terraform.d/:/root/.terraform.d/:rw
       - ./.:/app
