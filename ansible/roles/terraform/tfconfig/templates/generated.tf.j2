@@ -26,7 +26,7 @@ terraform {
 ################################################################################
 {% for provider, version in tfconfig.providers.items() %}
 {% set template  = './providers/' + provider + '.tf.j2' %}
-{% set providers = ['ansiblevault', 'aws', 'azurerm'] %}
+{% set providers = ['ansiblevault', 'aws', 'azurerm', 'cloudflare'] %}
 {{ "\n" + lookup('template', template) if provider in providers -}}
 {% endfor %}
 {% endif %}
