@@ -11,7 +11,7 @@ Opinionated tooling for maintaining terraform repository, module structures, and
 This will interactively sync files to a repository to support the aforementioned setup.
 
 ```shell
-docker run -it -v $(pwd):/app ghcr.io/typecoercion/ops-tools:0.2.27 bootstrap
+docker run -it -v $(pwd):/app ghcr.io/typecoercion/ops-tools:0.2.28 bootstrap
 ```
 
 ---
@@ -65,6 +65,10 @@ local inherit = import '../.tfvars.jsonnet'; inherit+
 
 #### Terraform Commands
 
+##### tfall
+
+Run supported terraform subcommands across the repository: `fmt` `init`
+
 ##### tfconfig
 
 Run in-scope of a specific module or across the repository. Will produce a `generated.tf` file based on the
@@ -77,8 +81,8 @@ variables and inheritance in `.tfvars.jsonnet` file in each module.
 
 ##### tfvault
 
-Run in-scope of a specific module to edit encrypted variables to a `.vault.yml` file. Requires the `ansiblevault`
-provider in the example above. The the `vault` property to consistently generate data resources.
+Run in-scope of a specific module to edit encrypted variables to a `.vault.yml` file. Intended for the `ansiblevault`
+provider in the example above. Use the `vault` property to consistently generate data and local resources.
 
 ---
 
@@ -87,7 +91,7 @@ provider in the example above. The the `vault` property to consistently generate
 Install tool versions via [asdf-vm](https://asdf-vm.com/) plugins. Terraform and Packer are included.
 
 ```dockerfile
-FROM ghcr.io/typecoercion/ops-tools:0.2.27
+FROM ghcr.io/typecoercion/ops-tools:0.2.28
 RUN asdf install packer 1.7.0
 RUN asdf install terraform 0.14.9
 ```
