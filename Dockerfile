@@ -1,7 +1,7 @@
 FROM ubuntu:20.04
 LABEL org.opencontainers.image.source='https://github.com/typecoercion/docker-ops-tools'
 
-ARG ANSIBLE_VERSION=2.10.7
+ARG ANSIBLE_VERSION=2.10.8
 
 ENV ANSIBLE_SSH_CONTROL_PATH=/dev/shm/cp%%h-%%p-%%r
 ENV JSONNET_PATH=/app/config
