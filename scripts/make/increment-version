@@ -1,0 +1,14 @@
+#!/bin/bash
+# increment version for setup
+set -e
+
+_run() {
+  bumpversion \
+    --allow-dirty \
+    --current-version=$(cat VERSION) \
+    --no-commit \
+    --no-tag patch \
+    ./Dockerfile ./README.md ./VERSION ./files/docker/ops/Dockerfile ./scripts/bin/bootstrap
+}
+
+_run

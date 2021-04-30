@@ -1,0 +1,2 @@
+brew "bumpversion"
+cask "docker"

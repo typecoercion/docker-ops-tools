@@ -10,3 +10,6 @@ create-use:
 
 docker-login:
 	docker login --username carbidemouse
+
+increment-version:
+	./scripts/make/increment-version

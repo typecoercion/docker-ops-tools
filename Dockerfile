@@ -1,5 +1,6 @@
 FROM ubuntu:20.04
 LABEL org.opencontainers.image.source='https://github.com/typecoercion/docker-ops-tools'
+LABEL version='0.2.32'
 
 ARG ANSIBLE_VERSION=2.10.8
 
