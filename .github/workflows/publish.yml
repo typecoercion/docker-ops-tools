@@ -14,11 +14,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - id: version-numeric
-        run: echo "::set-output name=version::$(cat VERSION.txt)"
-
-      - uses: actions-ecosystem/action-push-tag@v1
-        with:
-          tag: v${{ steps.version-numeric.outputs.version }}
+        run: echo "::set-output name=version::$(cat VERSION)"
 
       - uses: docker/setup-qemu-action@v1
 
@@ -38,3 +34,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ghcr.io/${{ env.docker-path }}:${{ steps.version-numeric.outputs.version }}
+
+      - uses: actions-ecosystem/action-push-tag@v1
+        with:
+          tag: v${{ steps.version-numeric.outputs.version }}

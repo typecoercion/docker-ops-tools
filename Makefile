@@ -1,5 +1,5 @@
 platforms := linux/amd64,linux/arm64
-version   := $(shell cat VERSION.txt)
+version   := $(shell cat VERSION)
 
 build-push:
 	docker buildx build --platform $(platforms) --push -t ghcr.io/typecoercion/ops-tools:$(version) .
