@@ -1,8 +1,8 @@
 FROM ubuntu:20.04
 LABEL org.opencontainers.image.source='https://github.com/typecoercion/docker-ops-tools'
-LABEL version='0.2.32'
+LABEL version='0.2.33'
 
-ARG ANSIBLE_VERSION=2.10.8
+ARG ANSIBLE_VERSION=4.3.0
 
 ENV ANSIBLE_SSH_CONTROL_PATH=/dev/shm/cp%%h-%%p-%%r
 ENV JSONNET_PATH=/app/config
@@ -13,7 +13,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 ARG APT='bash curl dnsutils git jq jsonnet make python-is-python3 python3-pip sshpass vim wget zip'
 RUN set -x && apt-get update && apt-get --yes install ${APT}
 
-ARG PIP="ansible-base==${ANSIBLE_VERSION} boto3 cryptography dnf dopy netaddr pyhcl pymysql yq"
+ARG PIP="ansible==${ANSIBLE_VERSION} boto3 cryptography dnf dopy netaddr pyhcl pymysql yq"
 RUN set -x && pip3 install ${PIP} && rm -rf ~/.cache
 
 COPY ./scripts/docker/install-asdf /tmp/install-asdf

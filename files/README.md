@@ -1,7 +1,7 @@
 ## Infrastructure
 
-A collection of playbooks for infrastructure provisioning, configuration, applications and services. Utilizes a
-containerized shell environment for dependency consistency. Includes both ansible and terraform binaries.
+A collection of tool for infrastructure provisioning and configuration. Utilizes a containerized shell environment for
+dependency version consistency. Includes `ansible` and `asdf-vm` bootstrap for `terraform` and `packer` binaries.
 
 ### Documentation
 
@@ -10,11 +10,11 @@ containerized shell environment for dependency consistency. Includes both ansibl
 
 ### Required Dependencies
 
-- [blackbox](https://github.com/StackExchange/blackbox)
 - [brew](https://brew.sh/)
 - [direnv](https://direnv.net)
 - [docker](https://www.docker.com)
 - [git](https://git-scm.com/)
+- [git-crypt](https://www.agwa.name/projects/git-crypt/)
 - [jsonnet](https://jsonnet.org/)
 
 Use make to install the system dependencies; script only works with macOS.
@@ -36,9 +36,6 @@ the host machine. Although the docker abstraction is not required, it makes thin
     # initialize .env file with instructions
     make setup-env
 
-    # initialize terraform credentials
-    terraform login
-
     # fetch dependencies and decrypt files
     make install
 
@@ -46,9 +43,8 @@ the host machine. Although the docker abstraction is not required, it makes thin
 
 ### Secret Access
 
-Follow the [blackbox](https://github.com/StackExchange/blackbox) documentation for updating the GPG keyring. Here are
+Follow the [git-crypt](https://www.agwa.name/projects/git-crypt/) documentation for updating the GPG keyring. Here are
 the quick instructions for adding an additional public key.
 
-    # grant admin access to secrets
-    gpg --homedir .blackbox --no-default-keyring --import .blackbox/keys/*.asc
-    GPG="gpg --no-default-keyring" blackbox_update_all_files
+    # grant public key access to decrypt secrets
+    git-crypt add-gpg-user 14C9252E3D21ACBF883F83DBDAD734A092DCC4BD
